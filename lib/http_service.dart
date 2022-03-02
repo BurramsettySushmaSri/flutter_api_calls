@@ -14,8 +14,10 @@ class Httpservice{
       // print(finalres[1]['id']);
       for(var i in finalres){
         if(i['id']%2==0){
-        postlist.add(Post.parseResponse(i));  
-        }
+          // i['id']=0;
+          postlist.add(Post.parseResponse(i));  
+        
+      }
       }
      return postlist;
     }
@@ -27,6 +29,7 @@ return postlist;
 }
  }
 }
+
 
 class Post{
   int userId;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_api_calls/users_api.dart';
 
 import 'http_service.dart';
 class DetailScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class DetailScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Text(postdata.body),
+        child: Text(postdata.title),
       ),
     );
   }

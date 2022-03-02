@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_api_calls/http_service.dart';
 import 'detailscreen.dart';
 import 'http_service.dart';
 
@@ -50,7 +51,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Post> postlist = List<Post>.empty(growable: true);
+  List<Post> Postlist = List<Post>.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
@@ -59,15 +60,15 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: ListView.builder(
-        itemCount: postlist.length,
+        itemCount: Postlist.length,
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.all(8.0),
           
           child: ListTile(
-            tileColor:(postlist.elementAt(index).id%2==0)?Colors.grey:Colors.orangeAccent,
-            trailing: IconButton(onPressed:(){Navigator.push(context, MaterialPageRoute(builder:(context)=>DetailScreen(postdata: postlist[index]),));},icon:const Icon(Icons.visibility)),
+            tileColor:(Postlist.elementAt(index).id%2==0)?Colors.grey:Colors.orangeAccent,
+            trailing: IconButton(onPressed:(){Navigator.push(context, MaterialPageRoute(builder:(context)=>DetailScreen(postdata: Postlist[index]),));},icon:const Icon(Icons.visibility)),
             title: Text(
-                "userid:${postlist.elementAt(index).userId}\nid:${postlist.elementAt(index).id}\ntitle:${postlist.elementAt(index).title}\nbody:${postlist.elementAt(index).body}"),
+                "id:${Postlist.elementAt(index).id}\nname:${Postlist.elementAt(index).title}\naddress:${Postlist.elementAt(index).body}"),
             
           ),
         ),
@@ -76,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          postlist = await Httpservice().fetchPost();
+          Postlist = await Httpservice().fetchPost();
           setState(() {});
         },
         tooltip: 'Increment',
