@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_calls/http_service.dart';
-import 'detailscreen.dart';
+import 'student_modal.dart';
 import 'http_service.dart';
 
 void main() {
@@ -51,7 +50,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Post> Postlist = List<Post>.empty(growable: true);
+  List<LiveSessions> Postlist = List<LiveSessions>.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: const EdgeInsets.all(8.0),
           
           child: ListTile(
-            tileColor:(Postlist.elementAt(index).id%2==0)?Colors.grey:Colors.orangeAccent,
-            trailing: IconButton(onPressed:(){Navigator.push(context, MaterialPageRoute(builder:(context)=>DetailScreen(postdata: Postlist[index]),));},icon:const Icon(Icons.visibility)),
+            tileColor:(Postlist.elementAt(index).session_id%2==0)?Colors.grey:Colors.orangeAccent,
+            // trailing: IconButton(onPressed:(){Navigator.push(context, MaterialPageRoute(builder:(context)=>DetailScreen(postdata: Postlist[index]),));},icon:const Icon(Icons.visibility)),
             title: Text(
-                "id:${Postlist.elementAt(index).id}\nname:${Postlist.elementAt(index).title}\naddress:${Postlist.elementAt(index).body}"),
+                "id:${Postlist.elementAt(index).session_id}\nname:${Postlist.elementAt(index).session_link}\n"),
             
           ),
         ),
@@ -77,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Postlist = await Httpservice().fetchPost();
+          Postlist = await Httpservice().fetchsession();
           setState(() {});
         },
         tooltip: 'Increment',
